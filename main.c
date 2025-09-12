@@ -39,10 +39,10 @@ int main(int ac,char **args)
     	printf("Usage: ./cub <map_file.cub>\n");
     	return (1);
 	}
-	if (!init_game(&game, &txt, args[1]));
+	if (!init_game(&game, &txt, args[1]))
 	{
 		ft_malloc(0,0);
-		return (1)
+		return (1);
 	}
     game->mlx = mlx_init();
 	load_texturse(game,txt);
@@ -52,6 +52,6 @@ int main(int ac,char **args)
     // mlx_put_image_to_window(game->mlx, game->win, game->txt.img_we, 0, game->txt.height);      // bottom-left
     // mlx_put_image_to_window(game->mlx, game->win, game->txt.img_ea, game->txt.width, game->txt.height);      // bottom-right
     mlx_loop(game->mlx);
-	debug_game(game, txt);
+	// debug_game(game, txt);
     return 0;
 }
