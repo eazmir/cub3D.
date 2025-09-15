@@ -3,7 +3,6 @@
 # SAN =  -g -O0 -fno-omit-frame-pointer -fsanitize=address 
 
 NAME = MST.a
-LIBFT_DIR = libft
 CONFIG_DIR = config
 DEBUG_DIR = debug
 UTILS_DIR = $(CONFIG_DIR)/utils
@@ -25,10 +24,9 @@ SRC = \
 	$(UTILS_DIR)/ft_utils3.c\
 
 OBJ = $(SRC:.c=.o)
+
 all: $(NAME) $(LIBFT_LIB)
 
-$(LIBFT_LIB):
-	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
 	@ar csr $(NAME) $(OBJ)
@@ -37,11 +35,9 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
-	@make -C $(LIBFT_DIR) clean
 
 fclean:clean
 	@rm -f $(NAME)
-	@make -C $(LIBFT_DIR) fclean
 
 re:fclean all
 

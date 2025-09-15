@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 MLX = ./mlx
 MFLAGS = -lmlx -lX11 -lXext -lm -lz 
 PARS_DIR = parsing
-MLX_LIB = $(MLX)/libmlx.a
+MLX_LIB = $(MLX)/libmlx_Linux.a
 LIBFT_DIR = $(PARS_DIR)/libft
 PARS_LIB = $(PARS_DIR)/MST.a
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
@@ -30,12 +30,12 @@ $(NAME): $(OBJ) $(LIBFT_LIB) $(PARS_LIB) $(MLX_LIB)
 clean:
 	@rm -f $(OBJ)
 	@make -C $(PARS_DIR) clean
-	@make -C $(MLX) clean
+	@make -C $(LIBFT_DIR) clean
 
 fclean:clean
 	@rm -f $(NAME)
 	@make -C $(PARS_DIR) fclean
-	@make -C $(MLX) clean
+	@make -C $(LIBFT_DIR) fclean
 
 re:fclean all
 
