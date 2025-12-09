@@ -24,8 +24,8 @@ void	debug_game(t_cub *game, t_texturse *txt)
 	debug_color("Ceiling", game->map.c_color);
 	// ADD THIS: Debug textures
 	printf("\nTextures:\n");
-	printf("  NO: -> %s\n", txt->so);
-	printf("  SO: -> %s\n", txt->no);
+	printf("  NO: -> %s\n", txt->no);
+	printf("  SO: -> %s\n", txt->so);
 	printf("  WE: -> %s\n", txt->we);
 	printf("  EA: -> %s\n", txt->ea);
 	printf("\nMap grid:\n");

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_texturse.config.c                               :+:      :+:    :+:   */
+/*   ft_texturse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:44:23 by eazmir            #+#    #+#             */
-/*   Updated: 2025/08/25 15:44:28 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/10 00:22:08 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char **get_texturse(char **line,int height)
 	int j = 0;
 	char **txt;
 
-	txt = ft_malloc(sizeof(char *) * 5,1);
+	txt = ft_malloc(sizeof(char *) * (height + 1),1);
 	if (!txt)
 		return (NULL);
 	while (i < height)
@@ -64,13 +64,13 @@ char	*ft_parse_txtrse(char *path, t_texturse *txt)
 		i = ft_skip_space(path, i);
 		j = ft_skip_space(path, j);
 		if (ft_texturse_formate(path, j) == 1)
-			return (txt->no = ft_strdup(path) + i);
+			return (txt->no = ft_strdup(path + i));
 		else if (ft_texturse_formate(path, j) == 2)
-			return (txt->so = ft_strdup(path) + i);
+			return (txt->so = ft_strdup(path + i));
 		else if (ft_texturse_formate(path, j) == 3)
-			return (txt->we = ft_strdup(path) + i);
+			return (txt->we = ft_strdup(path + i));
 		else if (ft_texturse_formate(path, j) == 4)
-			return (txt->ea = ft_strdup(path) + i);
+			return (txt->ea = ft_strdup(path + i));
 		else
 			return (NULL);
 	}
@@ -158,17 +158,23 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 int	ft_check_txt_isvald(t_cub *game, t_texturse *txt)
 {
 	int		i;
+	int		txt_count;
 	char	**p;
 	char	*cmp;
 	
 	char **txt1 = get_texturse(game->norm.cp_map,game->norm.height);
 	// if (!txt1)
 	// 	return (0);
-	if (ft_check_mltple_txtrse(txt1,4) == -1)
+	// Count texture definition lines
+	txt_count = 0;
+	while (txt1[txt_count])
+		txt_count++;
+	
+	if (ft_check_mltple_txtrse(txt1, txt_count) == -1)
 		return (-1);
-	if (!ft_check_mltple_txtrse(txt1,4))
+	if (!ft_check_mltple_txtrse(txt1, txt_count))
 		return (0);
-	p = ft_parse_txt_from_map(txt, txt1, 4);
+	p = ft_parse_txt_from_map(txt, txt1, txt_count);
 	i = 0;
 	while (i < 4)
 	{

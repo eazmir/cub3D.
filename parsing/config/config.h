@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 16:14:07 by eazmir            #+#    #+#             */
-/*   Updated: 2025/08/26 16:15:07 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/09 23:21:29 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char						**get_rgb_components(char **maps, char key,
 								int height);
 char						*trim_string(char *s);
 int							check_map_position(char **lines);
+int							is_texture_definition(char *line);
 char						*ft_getlines(char **maps, char key, int height);
 char						**ft_cp2d(t_cub *game, char **src, int height);
 char						**ft_cp_map(int fd, int height);

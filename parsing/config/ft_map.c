@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:51:01 by eazmir            #+#    #+#             */
-/*   Updated: 2025/08/25 17:53:02 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/09 23:21:28 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_border_row(char *row)
 		len--;
 	while (j < len)
 	{
-		if (row[j] != '1' && row[j] != ' ')
+		if (row[j] != '1' && row[j] != ' ' && row[j] != '\t')
 			return (0);
 		j++;
 	}
@@ -39,12 +39,12 @@ int	ft_check_middle_row(char *row)
 	if (len > 0 && row[len - 1] == '\n')
 		len--;
 	j = 0;
-	while (j < len && row[j] == ' ')
+	while (j < len && (row[j] == ' ' || row[j] == '\t'))
 		j++;
 	if (j < len && row[j] != '1')
 		return (0);
 	j = len - 1;
-	while (j >= 0 && row[j] == ' ')
+	while (j >= 0 && (row[j] == ' ' || row[j] == '\t'))
 		j--;
 	if (row[j] != '1')
 		return (0);
@@ -107,7 +107,7 @@ int	ft_check_characters(char **map, int height, int width)
 		{
 			if (l == 1)
 				return (0);
-			if (!ft_strchr("10NSEW ", map[i][j]))
+			if (!ft_strchr("10NSEW \t", map[i][j]))
 			{
 				return (0);
 			}
@@ -132,8 +132,14 @@ int	ft_check_space_on_map(char **map, int height, int width)
 		j = 0;
 		while (j < width && cop_map[i][j])
 		{
-			if (is_invalid_space(cop_map, i, j,height))
-				return (0);
+			// Only check flood-fill from playable positions
+			if (cop_map[i][j] == '0' || cop_map[i][j] == 'N' || 
+				cop_map[i][j] == 'S' || cop_map[i][j] == 'E' || 
+				cop_map[i][j] == 'W')
+			{
+				if (is_invalid_space(cop_map, i, j, height))
+					return (0);
+			}
 			j++;
 		}
 		i++;

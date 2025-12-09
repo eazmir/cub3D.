@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:14:06 by eazmir            #+#    #+#             */
-/*   Updated: 2025/09/05 09:14:09 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/10 00:27:21 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	**ft_cp_map(int fd, int height)
 {
 	char	**dest;
 	char	*line;
+	char	*prev_line;
 	int		i;
 
 	dest = ft_malloc(sizeof(char *) * (height + 1), 1);
@@ -23,12 +24,16 @@ char	**ft_cp_map(int fd, int height)
 		return (NULL);
 	line = get_next_line(fd);
 	i = 0;
-	while (i < height)
+	while (i < height && line)
 	{
 		dest[i] = ft_strdup(line);
+		// prev_line = line;
 		line = get_next_line(fd);
+		// free(prev_line);
 		i++;
 	}
+	// if (line)
+	// 	free(line);
 	dest[i] = NULL;
 	return (dest);
 }
@@ -46,7 +51,7 @@ char	**ft_remove_newline_from_map(t_cub *game, char **src, int height)
 	j = 0;
 	while (i < height)
 	{
-		if (!src[i] || src[i][0] == '\0' && (ft_strlen(src[i]) == 1) && (src[i][0] != '1' && src[i][1] != '1'))
+		if (!src[i] || (src[i][0] == '\0' && ft_strlen(src[i]) == 1))
 		{
 			i++;
 			continue ;

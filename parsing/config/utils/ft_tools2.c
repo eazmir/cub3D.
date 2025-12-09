@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils4.c                                           :+:      :+:    :+:   */
+/*   ft_tools2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:31:23 by eazmir            #+#    #+#             */
-/*   Updated: 2025/09/05 09:31:28 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/10 00:00:04 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 int	is_invalid_space(char **map_copy, int i, int j, int height)
 {
+	// Out of bounds vertically - ERROR
 	if (i < 0 || i >= height)
 		return (1);
-	if (j < 0 || j >= (int)ft_strlen(map_copy[i]))
+	// Out of bounds horizontally left - ERROR  
+	if (j < 0)
 		return (1);
+	// Beyond the end of this row - treat as implicit space (OK, stop here)
+	if (j >= (int)ft_strlen(map_copy[i]))
+		return (0);
+	// Wall or already visited - OK, stop here
 	if (map_copy[i][j] == '1' || map_copy[i][j] == 'V')
 		return (0);
-	if (map_copy[i][j] == ' ')
-	{
-		if (i == 0 || i == height - 1 || j == 0 || 
-			j == (int)ft_strlen(map_copy[i]) - 1)
-			return (1);
-	}
+	// Space or tab - treat as barrier, stop exploring but don't error
+	if (map_copy[i][j] == ' ' || map_copy[i][j] == '\t')
+		return (0);
+	// Playable position - mark as visited and continue exploring
 	map_copy[i][j] = 'V';
+	// Recursively check all 4 directions
 	if (is_invalid_space(map_copy, i - 1, j, height))  // Up
 		return (1);
 	if (is_invalid_space(map_copy, i + 1, j, height))  // Down

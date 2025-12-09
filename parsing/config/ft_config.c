@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_louad_img.c                                     :+:      :+:    :+:   */
+/*   ft_config.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 07:42:03 by eazmir            #+#    #+#             */
-/*   Updated: 2025/08/23 07:42:22 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/09 23:21:28 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ int	ft_config(t_cub *game, t_texturse *txt)
 	height = ft_get_height(fd);
 	lseek(fd, 0, SEEK_SET);
 	src = ft_cp_map(fd, height);
+	if (!check_map_position(src))
+	{
+		error("map must be last");
+		close(fd);
+		return (0);
+	}
 	game->norm.cp_map = ft_remove_newline_from_map(game, src, height);
 	game->map.grid = ft_cp2d(game, game->norm.cp_map, game->norm.height);
 	if (!game->map.grid)

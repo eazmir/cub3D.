@@ -8,7 +8,7 @@ SRC = main.c
 OBJ = $(SRC:.c=.o)
 
 MLX = ./mlx
-MFLAGS = -lmlx -lX11 -lXext -lm -lz 
+# MFLAGS = -lmlx -lX11 -lXext -lm -lz 
 PARS_DIR = parsing
 MLX_LIB = $(MLX)/libmlx_Linux.a
 LIBFT_DIR = $(PARS_DIR)/libft

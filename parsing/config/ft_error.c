@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 16:21:46 by eazmir            #+#    #+#             */
-/*   Updated: 2025/08/26 16:22:14 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/09 23:21:28 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ int	ft_check_eorr(char **map, int height, int width)
 
 int	ft_check_error(char **map, int height, int width)
 {
-	if (!check_map_position(map))
-	{
-		error("map must be last");
-		return (0);
-	}
 	if (ft_check_eorr(map, height, width) != 1)
 		return (0);
 	else if (!ft_check_player(map, height, width))
