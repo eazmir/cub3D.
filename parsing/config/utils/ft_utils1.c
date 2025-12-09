@@ -30,6 +30,8 @@ void	ft_remove_newline(char *str)
 
 int	ft_skip_space(char *s, int i)
 {
+	if (!s)
+		return (i);
 	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
 		i++;
 	return (i);

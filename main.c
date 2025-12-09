@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
+#include "parsing/debug/debug.h"
 #include "mlx.h"
 
 void load_texturse(t_cub *game,t_texturse *txt)
@@ -44,13 +45,14 @@ int main(int ac,char **args)
 		return (1);
 	}
     game->mlx = mlx_init();
+	debug_game(game, txt);
 	load_texturse(game,txt);
-    game->win = mlx_new_window(game->mlx, 600, 800, "Hello MLX");
-	mlx_put_image_to_window(game->mlx, game->win, game->txt.img_no, 0, 0);      // top-left
-    mlx_put_image_to_window(game->mlx, game->win, game->txt.img_so, game->txt.width, 0);      // top-right
-    mlx_put_image_to_window(game->mlx, game->win, game->txt.img_we, 0, game->txt.height);      // bottom-left
-    mlx_put_image_to_window(game->mlx, game->win, game->txt.img_ea, game->txt.width, game->txt.height);      // bottom-right
-    mlx_loop(game->mlx);
-	// debug_game(game, txt);
+    // game->win = mlx_new_window(game->mlx, 600, 800, "Hello MLX");
+	// mlx_put_image_to_window(game->mlx, game->win, game->txt.img_no, 0, 0);      // top-left
+    // mlx_put_image_to_window(game->mlx, game->win, game->txt.img_so, game->txt.width, 0);      // top-right
+    // mlx_put_image_to_window(game->mlx, game->win, game->txt.img_we, 0, game->txt.height);      // bottom-left
+    // mlx_put_image_to_window(game->mlx, game->win, game->txt.img_ea, game->txt.width, game->txt.height);      // bottom-right
+    // mlx_loop(game->mlx);
+	
     return 0;
 }

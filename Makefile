@@ -1,6 +1,8 @@
-CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+# CC = cc
+# CFLAGS = -g -Wall -Wextra -Werror
 
+CFLAGS = -g  -Wall -Wextra -Werror
+SAN =  -g -O0 -fno-omit-frame-pointer -fsanitize=address
 NAME = cub
 SRC = main.c
 OBJ = $(SRC:.c=.o)
@@ -25,7 +27,7 @@ $(MLX_LIB):
 all: $(NAME) $(LIBFT_LIB) $(PARS_LIB) $(MLX_LIB)
 
 $(NAME): $(OBJ) $(LIBFT_LIB) $(PARS_LIB) $(MLX_LIB)
-	@$(CC) $(CFLAGS)  $(OBJ) $(PARS_LIB) $(MLX_LIB) $(MFLAGS) $(LIBFT_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SAN) $(OBJ) $(PARS_LIB) $(MLX_LIB) $(MFLAGS) $(LIBFT_LIB) -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)
@@ -39,4 +41,4 @@ fclean:clean
 
 re:fclean all
 
-.PHONE: clean all fclean re
+.PHONY: clean all fclean re

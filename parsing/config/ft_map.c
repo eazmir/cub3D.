@@ -57,6 +57,7 @@ int	ft_check_close_walls(char **maps, int height, int width)
 
 	(void)width;
 	i = 0;
+
 	while (i < height)
 	{
 		if (i == 0 || i == height - 1)
@@ -72,6 +73,22 @@ int	ft_check_close_walls(char **maps, int height, int width)
 		i++;
 	}
 	return (1);
+}
+
+char **get_copy(char **src,int height)
+{
+	char **dest;
+	int i;
+
+	dest = ft_malloc(sizeof(char *) * (height + 1), 1);
+	i = 0;
+	while (i < height)
+	{
+		dest[i] = ft_strdup(src[i]);
+		i++;
+	}
+	dest[i] = NULL;
+	return (dest);
 }
 
 int	ft_check_characters(char **map, int height, int width)
@@ -105,15 +122,17 @@ int	ft_check_space_on_map(char **map, int height, int width)
 {
 	int	i;
 	int	j;
-
+	char **cop_map;
 	i = 0;
+
+	cop_map = get_copy(map,height);
 	while (i < height)
 	{
-		width = ft_strlen(map[i]);
+		width = ft_strlen(cop_map[i]);
 		j = 0;
-		while (j < width && map[i][j])
+		while (j < width && cop_map[i][j])
 		{
-			if (is_invalid_space(map, i, j))
+			if (is_invalid_space(cop_map, i, j,height))
 				return (0);
 			j++;
 		}

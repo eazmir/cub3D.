@@ -12,21 +12,62 @@
 
 #include "../config.h"
 
-int	is_invalid_space(char **map, size_t i, size_t j)
+int	is_invalid_space(char **map_copy, int i, int j, int height)
 {
-	if (map[i][j] != '0' && map[i][j] != 'N' && map[i][j] != 'E'
-		&& map[i][j] != 'S' && map[i][j] != 'W')
+	if (i < 0 || i >= height)
+		return (1);
+	if (j < 0 || j >= (int)ft_strlen(map_copy[i]))
+		return (1);
+	if (map_copy[i][j] == '1' || map_copy[i][j] == 'V')
 		return (0);
-	if (i == 0 || j >= ft_strlen(map[i - 1]) || map[i - 1][j] == ' ')
+	if (map_copy[i][j] == ' ')
+	{
+		if (i == 0 || i == height - 1 || j == 0 || 
+			j == (int)ft_strlen(map_copy[i]) - 1)
+			return (1);
+	}
+	map_copy[i][j] = 'V';
+	if (is_invalid_space(map_copy, i - 1, j, height))  // Up
 		return (1);
-	if (!map[i + 1] || j >= ft_strlen(map[i + 1]) || map[i + 1][j] == ' ')
+	if (is_invalid_space(map_copy, i + 1, j, height))  // Down
 		return (1);
-	if (j == 0 || map[i][j - 1] == ' ')
+	if (is_invalid_space(map_copy, i, j - 1, height))  // Left
 		return (1);
-	if (j + 1 >= ft_strlen(map[i]) || map[i][j + 1] == ' ')
-		return (1);
+	if (is_invalid_space(map_copy, i, j + 1, height))  // Right
+		return (1);	
 	return (0);
 }
+// int	is_invalid_space(char **map, size_t i, size_t j)
+// {
+// 	if (map[i][j] != '0' && map[i][j] != 'N' && map[i][j] != 'E'
+// 		&& map[i][j] != 'S' && map[i][j] != 'W')
+// 		return (0);
+// 	if (i == 0 || j >= ft_strlen(map[i - 1]) || map[i - 1][j] == ' ')
+// 		return (1);
+// 	if (!map[i + 1] || j >= ft_strlen(map[i + 1]) || map[i + 1][j] == ' ')
+// 		return (1);
+// 	if (j == 0 || map[i][j - 1] == ' ')
+// 		return (1);
+// 	if (j + 1 >= ft_strlen(map[i]) || map[i][j + 1] == ' ')
+// 		return (1);
+// 	return (0);
+// }
+
+// int	is_invalid_space(char **map, size_t i, size_t j)
+// {
+// 	if (map[i][j] != '0' && map[i][j] != 'N' && map[i][j] != 'E'
+// 		&& map[i][j] != 'S' && map[i][j] != 'W')
+// 		return (0);
+// 	if (i == 0 || j >= ft_strlen(map[i - 1]) || map[i - 1][j] == '\0')
+// 		return (1);
+// 	if (!map[i + 1] || j >= ft_strlen(map[i + 1]) || map[i + 1][j] == '\0')
+// 		return (1);
+// 	if (j == 0 || map[i][j - 1] == '\0')
+// 		return (1);
+// 	if (j + 1 >= ft_strlen(map[i]) || map[i][j + 1] == '\0')
+// 		return (1);
+// 	return (0);
+// }
 
 int	ft_is_only_digits(char *s)
 {

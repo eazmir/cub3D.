@@ -37,8 +37,9 @@ int	ft_config(t_cub *game, t_texturse *txt)
 	src = ft_cp_map(fd, height);
 	game->norm.cp_map = ft_remove_newline_from_map(game, src, height);
 	game->map.grid = ft_cp2d(game, game->norm.cp_map, game->norm.height);
+	if (!game->map.grid)
+		return (0);
 	game->map.width = ft_strlen(game->map.grid[0]);
-	game->map.width--;
 	if (!ft_getcolors(game))
 		return (0);
 	if (!ft_check_txt_error(game, txt))

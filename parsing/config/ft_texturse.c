@@ -12,6 +12,44 @@
 
 #include "config.h"
 
+int is_grid(char *s)
+{
+	while (*s == ' ' || *s == '\t')
+		s++;
+
+	return (*s == '1' || *s == '0');
+}
+static int is_empty(char *s)
+{
+    int i = 0;
+    while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+        i++;
+
+    return (s[i] == '\0');
+}
+
+char **get_texturse(char **line,int height)
+{
+	int i = 0;
+	int j = 0;
+	char **txt;
+
+	txt = ft_malloc(sizeof(char *) * 5,1);
+	if (!txt)
+		return (NULL);
+	while (i < height)
+	{
+		if (ft_checker(line[i]))
+			txt[j++] = line[i];
+		else if (is_empty(line[i]))
+			;
+		else if (is_grid(line[i]))
+			;
+		i++;
+	}
+	txt[j] = NULL;
+	return (txt);
+}
 char	*ft_parse_txtrse(char *path, t_texturse *txt)
 {
 	int	j;
@@ -19,7 +57,7 @@ char	*ft_parse_txtrse(char *path, t_texturse *txt)
 
 	i = 0;
 	j = 0;
-	i = ft_skip_space(path, i);
+	i = ft_skip_space(path, 0);
 	if (ft_texturse_formate(path, i))
 	{
 		i += 2;
@@ -97,15 +135,14 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 	int	i;
 	int	id;
 	int	c[5];
-
+	if (!maps[0] || !maps)
+		return (0);
 	ft_memset(c, 0, sizeof(c));
 	if (!force_checker(maps, height))
 		return (-1);
 	i = 0;
 	while (i < height)
 	{
-		if (maps[i][0] != 'F' && maps[i][0] != 'C')
-		{
 			id = ft_checker2(maps[i]);
 			if (id > 0)
 			{
@@ -113,7 +150,6 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 				if (c[id] > 1)
 					return (0);
 			}
-		}
 		i++;
 	}
 	return (1);
@@ -124,12 +160,15 @@ int	ft_check_txt_isvald(t_cub *game, t_texturse *txt)
 	int		i;
 	char	**p;
 	char	*cmp;
-
-	if (ft_check_mltple_txtrse(game->norm.cp_map, game->norm.height) == -1)
+	
+	char **txt1 = get_texturse(game->norm.cp_map,game->norm.height);
+	// if (!txt1)
+	// 	return (0);
+	if (ft_check_mltple_txtrse(txt1,4) == -1)
 		return (-1);
-	if (!ft_check_mltple_txtrse(game->norm.cp_map, game->norm.height))
+	if (!ft_check_mltple_txtrse(txt1,4))
 		return (0);
-	p = ft_parse_txt_from_map(txt, game->norm.cp_map, game->norm.height);
+	p = ft_parse_txt_from_map(txt, txt1, 4);
 	i = 0;
 	while (i < 4)
 	{

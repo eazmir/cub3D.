@@ -56,16 +56,18 @@ int							ft_force_checker(char *s);
 int							ft_check_fc(char *s);
 int							ft_isvalid(char *r, char *g, char *b);
 int							ft_check_lines(char **p);
-int							is_invalid_space(char **map, size_t i, size_t j);
+int							is_invalid_space(char **map_copy, int i, int j, int height);
 int							ft_check_empty_values(char **rgb);
 int							check_floor_color(t_cub *game);
 int							check_ceiling_color(t_cub *game);
+int 						is_map_line(char *line);
 int							ft_checker3(char *line);
 char						*clean_component(char *value, char key,
 								int is_first);
 char						**get_rgb_components(char **maps, char key,
 								int height);
 char						*trim_string(char *s);
+int							check_map_position(char **lines);
 char						*ft_getlines(char **maps, char key, int height);
 char						**ft_cp2d(t_cub *game, char **src, int height);
 char						**ft_cp_map(int fd, int height);

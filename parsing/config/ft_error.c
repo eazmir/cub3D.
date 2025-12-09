@@ -21,12 +21,12 @@ void	error(char *str)
 
 int	ft_check_eorr(char **map, int height, int width)
 {
-	if (!map[0])
-	{
-		error("the map is empty");
-		return (0);
-	}
-	else if (ft_check_close_walls(map, height, width) == 0)
+	// if (!map[0])
+	// {
+	// 	error("the map is empty");
+	// 	return (0);
+	// }
+	 if (ft_check_close_walls(map, height, width) == 0)
 	{
 		error("map must be surrounded by walls");
 		return (0);
@@ -46,9 +46,14 @@ int	ft_check_eorr(char **map, int height, int width)
 
 int	ft_check_error(char **map, int height, int width)
 {
+	if (!check_map_position(map))
+	{
+		error("map must be last");
+		return (0);
+	}
 	if (ft_check_eorr(map, height, width) != 1)
 		return (0);
-	else if (ft_check_player(map, height, width) == 0)
+	else if (!ft_check_player(map, height, width))
 	{
 		error("map most have only one player");
 		return (0);
