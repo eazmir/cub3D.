@@ -46,7 +46,7 @@ char	*ft_strtrim_color(char *str)
 	int		len;
 	int		i;
 
-	start = str;     
+	start = str;
 	while (*start == ' ' || *start == '\t')
 		start++;
 	end = start + ft_strlen(start) - 1;

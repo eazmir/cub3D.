@@ -46,11 +46,7 @@ int	ft_config(t_cub *game, t_texturse *txt)
 	if (!game->map.grid)
 		return (0);
 	game->map.width = ft_strlen(game->map.grid[0]);
-	if (!ft_getcolors(game))
-		return (0);
 	if (!ft_check_txt_error(game, txt))
-		return (0);
-	if (!ft_check_error(game->map.grid, game->map.height, game->map.width))
 		return (0);
 	close(fd);
 	return (1);
@@ -62,12 +58,12 @@ void	the_end(t_cub *game, t_texturse *txt)
 
 	if (!ft_check_status_file(game->file))
 	{
-		ft_malloc(0,0);
+		ft_malloc(0, 0);
 		exit(0);
 	}
 	if (!ft_config(game, txt))
 	{
-		ft_malloc(0,0);
+		ft_malloc(0, 0);
 		exit(0);
 	}
 	pos_player = ft_get_position(game->map.grid, game->map.height,
@@ -86,7 +82,7 @@ int	init_game(t_cub **game, t_texturse **txt, char *file)
 		return (0);
 	}
 	init_cub(*game);
-	init_texturse(*txt);
+	init_texturse(*txt, *game);
 	(*game)->file = file;
 	the_end(*game, *txt);
 	return (1);

@@ -12,46 +12,35 @@
 
 #include "../config.h"
 
-int is_map_empty(char **src)
+int	is_map_empty(char **src)
 {
-    int i = 0;
-    int j;
+	int	i;
+	int	j;
 
-    if (!src || !src[0])
-        return (1);
-
-    while (src[i])
-    {
-        j = 0;
-        while (src[i][j])
-        {
-            if (src[i][j] == '1' || src[i][j] == '0' ||
-                src[i][j] == 'N' || src[i][j] == 'S' ||
-                src[i][j] == 'E' || src[i][j] == 'W')
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
-}
-
-static int is_empty(char *s)
-{
-    int i = 0;
-    while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-        i++;
-
-    return (s[i] == '\0');
+	i = 0;
+	if (!src || !src[0])
+		return (1);
+	while (src[i])
+	{
+		j = 0;
+		while (src[i][j])
+		{
+			if (src[i][j] == '1' || src[i][j] == '0' || src[i][j] == 'N'
+				|| src[i][j] == 'S' || src[i][j] == 'E' || src[i][j] == 'W')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 static void	get_map_bounds(char **src, int height, int *start, int *end)
 {
-	int i;
+	int	i;
 
 	*start = -1;
 	*end = -1;
-
 	i = 0;
 	while (i < height && *start == -1)
 	{
@@ -82,7 +71,7 @@ static char	**copy_map_grid(t_cub *game, char **src, int start, int end)
 	while (i <= end)
 	{
 		if (!src[i])
-			break;
+			break ;
 		if (!ft_checker3(src[i]))
 		{
 			ft_remove_newline(src[i]);
@@ -95,11 +84,12 @@ static char	**copy_map_grid(t_cub *game, char **src, int start, int end)
 	return (dest);
 }
 
-char **ft_cp2d(t_cub *game, char **src, int height)
+char	**ft_cp2d(t_cub *game, char **src, int height)
 {
-	int start;
-	int end;
-	char **cp;
+	int		start;
+	int		end;
+	char	**cp;
+
 	if (is_map_empty(src))
 	{
 		error("the map is empty");

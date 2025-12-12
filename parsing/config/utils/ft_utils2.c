@@ -27,13 +27,9 @@ char	**ft_cp_map(int fd, int height)
 	while (i < height && line)
 	{
 		dest[i] = ft_strdup(line);
-		// prev_line = line;
 		line = get_next_line(fd);
-		// free(prev_line);
 		i++;
 	}
-	// if (line)
-	// 	free(line);
 	dest[i] = NULL;
 	return (dest);
 }

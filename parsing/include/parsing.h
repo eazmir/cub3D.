@@ -13,9 +13,9 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "../../include/cub3d.h"
-#include "../libft/libft.h"
-#include "../config/config.h"
+# include "../../include/cub3d.h"
+# include "../config/config.h"
+# include "../libft/libft.h"
 
-int			init_game(t_cub **game, t_texturse **txt, char *file);
+int	init_game(t_cub **game, t_texturse **txt, char *file);
 #endif

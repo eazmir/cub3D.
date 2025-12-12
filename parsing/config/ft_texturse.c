@@ -12,44 +12,6 @@
 
 #include "config.h"
 
-int is_grid(char *s)
-{
-	while (*s == ' ' || *s == '\t')
-		s++;
-
-	return (*s == '1' || *s == '0');
-}
-static int is_empty(char *s)
-{
-    int i = 0;
-    while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-        i++;
-
-    return (s[i] == '\0');
-}
-
-char **get_texturse(char **line,int height)
-{
-	int i = 0;
-	int j = 0;
-	char **txt;
-
-	txt = ft_malloc(sizeof(char *) * (height + 1),1);
-	if (!txt)
-		return (NULL);
-	while (i < height)
-	{
-		if (ft_checker(line[i]))
-			txt[j++] = line[i];
-		else if (is_empty(line[i]))
-			;
-		else if (is_grid(line[i]))
-			;
-		i++;
-	}
-	txt[j] = NULL;
-	return (txt);
-}
 char	*ft_parse_txtrse(char *path, t_texturse *txt)
 {
 	int	j;
@@ -75,32 +37,6 @@ char	*ft_parse_txtrse(char *path, t_texturse *txt)
 			return (NULL);
 	}
 	return (NULL);
-}
-
-char	**ft_parse_txt_from_map(t_texturse *txt, char **map, int height)
-{
-	int		i;
-	int		j;
-	char	**p;
-	char	*t;
-
-	p = ft_malloc(sizeof(char *) * 5, 1);
-	if (!p)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (i < height)
-	{
-		if (ft_checker(map[i]))
-		{
-			t = ft_parse_txtrse(map[i], txt);
-			if (t)
-				p[j++] = t;
-		}
-		i++;
-	}
-	p[j] = NULL;
-	return (p);
 }
 
 int	force_checker(char **s, int height)
@@ -135,6 +71,7 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 	int	i;
 	int	id;
 	int	c[5];
+
 	if (!maps[0] || !maps)
 		return (0);
 	ft_memset(c, 0, sizeof(c));
@@ -143,13 +80,30 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 	i = 0;
 	while (i < height)
 	{
-			id = ft_checker2(maps[i]);
-			if (id > 0)
-			{
-				c[id]++;
-				if (c[id] > 1)
-					return (0);
-			}
+		id = ft_checker2(maps[i]);
+		if (id > 0)
+		{
+			c[id]++;
+			if (c[id] > 1)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	ft_validate_texture_format(char **p)
+{
+	int		i;
+	char	*cmp;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (!p[i])
+			return (0);
+		if (!is_valid_extension(p[i]))
+			return (-2);
 		i++;
 	}
 	return (1);
@@ -157,38 +111,18 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 
 int	ft_check_txt_isvald(t_cub *game, t_texturse *txt)
 {
-	int		i;
 	int		txt_count;
+	char	**txt1;
 	char	**p;
-	char	*cmp;
-	
-	char **txt1 = get_texturse(game->norm.cp_map,game->norm.height);
-	// if (!txt1)
-	// 	return (0);
-	// Count texture definition lines
+
+	txt1 = get_texturse(game->norm.cp_map, game->norm.height);
 	txt_count = 0;
 	while (txt1[txt_count])
 		txt_count++;
-	
 	if (ft_check_mltple_txtrse(txt1, txt_count) == -1)
 		return (-1);
 	if (!ft_check_mltple_txtrse(txt1, txt_count))
 		return (0);
 	p = ft_parse_txt_from_map(txt, txt1, txt_count);
-	i = 0;
-	while (i < 4)
-	{
-		if (!p[i])
-			return (0);
-		cmp = ft_strrchr(p[i], '.');
-		if (!cmp)
-			return (0);
-		remove_space_newline(cmp);
-		if (ft_strlen(cmp) != 4 || ft_strncmp(cmp, ".xpm", 4) != 0)
-			return (-2);
-		i++;
-	}
-	if (!ft_check_lines(p))
-		return (-2);
-	return (1);
+	return (ft_validate_texture_format(p));
 }

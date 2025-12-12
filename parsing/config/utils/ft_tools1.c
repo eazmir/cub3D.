@@ -32,7 +32,7 @@ int	ft_texturse_formate(char *key, int i)
 int	ft_checker(char *line)
 {
 	int	i;
-	
+
 	if (!line)
 		return (0);
 	i = ft_skip_space(line, 0);
@@ -52,7 +52,7 @@ int	ft_checker(char *line)
 int	ft_checker2(char *line)
 {
 	int	i;
-	
+
 	if (!line)
 		return (0);
 	i = ft_skip_space(line, 0);
@@ -72,7 +72,7 @@ int	ft_checker2(char *line)
 int	ft_checker3(char *line)
 {
 	int	i;
-	
+
 	if (!line)
 		return (0);
 	i = ft_skip_space(line, 0);

@@ -24,6 +24,7 @@ SRC = \
 	$(UTILS_DIR)/ft_utils3.c\
 	$(UTILS_DIR)/ft_tools3.c\
 	$(UTILS_DIR)/ft_utils4.c\
+	$(UTILS_DIR)/ft_utils5.c\
 
 OBJ = $(SRC:.c=.o)
 

@@ -14,65 +14,25 @@
 
 int	is_invalid_space(char **map_copy, int i, int j, int height)
 {
-	// Out of bounds vertically - ERROR
 	if (i < 0 || i >= height)
 		return (1);
-	// Out of bounds horizontally left - ERROR  
 	if (j < 0)
 		return (1);
-	// Beyond the end of this row - treat as implicit space (OK, stop here)
 	if (j >= (int)ft_strlen(map_copy[i]))
 		return (0);
-	// Wall or already visited - OK, stop here
 	if (map_copy[i][j] == '1' || map_copy[i][j] == 'V')
 		return (0);
-	// Space or tab - treat as barrier, stop exploring but don't error
-	if (map_copy[i][j] == ' ' || map_copy[i][j] == '\t')
-		return (0);
-	// Playable position - mark as visited and continue exploring
 	map_copy[i][j] = 'V';
-	// Recursively check all 4 directions
-	if (is_invalid_space(map_copy, i - 1, j, height))  // Up
+	if (is_invalid_space(map_copy, i - 1, j, height))
 		return (1);
-	if (is_invalid_space(map_copy, i + 1, j, height))  // Down
+	if (is_invalid_space(map_copy, i + 1, j, height))
 		return (1);
-	if (is_invalid_space(map_copy, i, j - 1, height))  // Left
+	if (is_invalid_space(map_copy, i, j - 1, height))
 		return (1);
-	if (is_invalid_space(map_copy, i, j + 1, height))  // Right
-		return (1);	
+	if (is_invalid_space(map_copy, i, j + 1, height))
+		return (1);
 	return (0);
 }
-// int	is_invalid_space(char **map, size_t i, size_t j)
-// {
-// 	if (map[i][j] != '0' && map[i][j] != 'N' && map[i][j] != 'E'
-// 		&& map[i][j] != 'S' && map[i][j] != 'W')
-// 		return (0);
-// 	if (i == 0 || j >= ft_strlen(map[i - 1]) || map[i - 1][j] == ' ')
-// 		return (1);
-// 	if (!map[i + 1] || j >= ft_strlen(map[i + 1]) || map[i + 1][j] == ' ')
-// 		return (1);
-// 	if (j == 0 || map[i][j - 1] == ' ')
-// 		return (1);
-// 	if (j + 1 >= ft_strlen(map[i]) || map[i][j + 1] == ' ')
-// 		return (1);
-// 	return (0);
-// }
-
-// int	is_invalid_space(char **map, size_t i, size_t j)
-// {
-// 	if (map[i][j] != '0' && map[i][j] != 'N' && map[i][j] != 'E'
-// 		&& map[i][j] != 'S' && map[i][j] != 'W')
-// 		return (0);
-// 	if (i == 0 || j >= ft_strlen(map[i - 1]) || map[i - 1][j] == '\0')
-// 		return (1);
-// 	if (!map[i + 1] || j >= ft_strlen(map[i + 1]) || map[i + 1][j] == '\0')
-// 		return (1);
-// 	if (j == 0 || map[i][j - 1] == '\0')
-// 		return (1);
-// 	if (j + 1 >= ft_strlen(map[i]) || map[i][j + 1] == '\0')
-// 		return (1);
-// 	return (0);
-// }
 
 int	ft_is_only_digits(char *s)
 {
@@ -127,23 +87,18 @@ void	remove_space_newline(char *str)
 	}
 }
 
-int	ft_check_lines(char **p)
+char	**get_copy(char **src, int height)
 {
+	char	**dest;
 	int		i;
-	char	*cmp;
 
+	dest = ft_malloc(sizeof(char *) * (height + 1), 1);
 	i = 0;
-	while (i < 4)
+	while (i < height)
 	{
-		if (!p[i])
-			return (0);
-		cmp = ft_strrchr(p[i], '.');
-		if (!cmp)
-			return (0);
-		remove_space_newline(cmp);
-		if (ft_strlen(cmp) != 4)
-			return (0);
+		dest[i] = ft_strdup(src[i]);
 		i++;
 	}
-	return (1);
+	dest[i] = NULL;
+	return (dest);
 }

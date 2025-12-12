@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_debug.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/11 12:51:58 by eazmir            #+#    #+#             */
+/*   Updated: 2025/12/11 12:52:02 by eazmir           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/parsing.h"
 
 void	debug_color(const char *name, int color)
@@ -22,7 +34,6 @@ void	debug_game(t_cub *game, t_texturse *txt)
 	printf("Map height: %d\n", game->map.height);
 	debug_color("Floor", game->map.f_color);
 	debug_color("Ceiling", game->map.c_color);
-	// ADD THIS: Debug textures
 	printf("\nTextures:\n");
 	printf("  NO: -> %s\n", txt->no);
 	printf("  SO: -> %s\n", txt->so);
@@ -37,19 +48,6 @@ void	debug_game(t_cub *game, t_texturse *txt)
 	printf("======================\n");
 }
 
-void	pro_debug(void)
-{
-	static int	index = 1;
-
-	printf("______%d______\n", index++);
-}
-
-void	debug_map_info(int width, int height)
-{
-	printf("Map width: %d\n", width);
-	printf("Map height: %d\n", height);
-}
-
 void	debug_map_grid(t_cub *game)
 {
 	int	i;
@@ -62,41 +60,7 @@ void	debug_map_grid(t_cub *game)
 	}
 }
 
-void	debug_textures(char *no, char *so, char *we, char *ea, char *sprite,
-		char *sky, char *floor)
-{
-	printf("NO: %s\n", no);
-	printf("SO: %s\n", so);
-	printf("WE: %s\n", we);
-	printf("EA: %s\n", ea);
-	printf("S : %s\n", sprite);
-	printf("ST: %s\n", sky);
-	printf("FT: %s\n", floor);
-}
-
-void	debug_line_ascii(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		printf("char[%d] = '%c' (ascii=%d)\n", i, line[i],
-			(unsigned char)line[i]);
-		i++;
-	}
-}
-
 void	debug_player(int x, int y, char dir)
 {
 	printf("Player position: (%d,%d) facing '%c'\n", x, y, dir);
-}
-
-int	debug_index(int reset)
-{
-	static int	index = 0;
-
-	if (reset)
-		index = 0;
-	return (index++);
 }

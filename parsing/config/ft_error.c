@@ -21,12 +21,7 @@ void	error(char *str)
 
 int	ft_check_eorr(char **map, int height, int width)
 {
-	// if (!map[0])
-	// {
-	// 	error("the map is empty");
-	// 	return (0);
-	// }
-	 if (ft_check_close_walls(map, height, width) == 0)
+	if (ft_check_close_walls(map, height, width) == 0)
 	{
 		error("map must be surrounded by walls");
 		return (0);
@@ -58,6 +53,10 @@ int	ft_check_error(char **map, int height, int width)
 
 int	ft_check_txt_error(t_cub *game, t_texturse *txt)
 {
+	if (!ft_getcolors(game))
+		return (0);
+	if (!ft_check_error(game->map.grid, game->map.height, game->map.width))
+		return (0);
 	if (ft_check_txt_isvald(game, txt) == 0)
 	{
 		error("Missing texture");

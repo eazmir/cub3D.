@@ -12,12 +12,16 @@
 
 #include "config.h"
 
-void	init_texturse(t_texturse *txt)
+void	init_texturse(t_texturse *txt, t_cub *game)
 {
 	txt->no = NULL;
 	txt->so = NULL;
 	txt->we = NULL;
 	txt->ea = NULL;
+	game->txt.img_no = NULL;
+	game->txt.img_so = NULL;
+	game->txt.img_we = NULL;
+	game->txt.img_ea = NULL;
 }
 
 void	init_map(t_map *map)
