@@ -12,19 +12,19 @@
 
 #include "config.h"
 
-void	init_texturse(t_texturse *txt, t_cub *game)
+void	init_texturse(t_texturse *txt)
 {
 	txt->no = NULL;
 	txt->so = NULL;
 	txt->we = NULL;
 	txt->ea = NULL;
-	game->txt.img_no = NULL;
-	game->txt.img_so = NULL;
-	game->txt.img_we = NULL;
-	game->txt.img_ea = NULL;
+	txt->img_no = NULL;
+	txt->img_so = NULL;
+	txt->img_we = NULL;
+	txt->img_ea = NULL;
 }
 
-void	init_map(t_map *map)
+void	init_map(t_cub *map)
 {
 	map->grid = NULL;
 	map->c_color = 0;
@@ -45,5 +45,5 @@ void	init_cub(t_cub *cub)
 {
 	cub->file = NULL;
 	init_norm(&cub->norm);
-	init_map(&cub->map);
+	init_map(cub);
 }

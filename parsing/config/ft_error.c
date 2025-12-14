@@ -55,7 +55,7 @@ int	ft_check_txt_error(t_cub *game, t_texturse *txt)
 {
 	if (!ft_getcolors(game))
 		return (0);
-	if (!ft_check_error(game->map.grid, game->map.height, game->map.width))
+	if (!ft_check_error(game->grid, game->height, game->width))
 		return (0);
 	if (ft_check_txt_isvald(game, txt) == 0)
 	{

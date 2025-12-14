@@ -36,23 +36,25 @@ char	**ft_cp_map(int fd, int height)
 
 char	**ft_remove_newline_from_map(t_cub *game, char **src, int height)
 {
+	char	*temp;
 	char	**dest;
 	int		i;
 	int		j;
+	int		len;
 
 	dest = ft_malloc(sizeof(char *) * (height + 1), 1);
-	if (!dest)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (i < height)
 	{
-		if (!src[i] || (src[i][0] == '\0' && ft_strlen(src[i]) == 1))
+		len = ft_strlen(src[i]);
+		if (len > 0 && src[i][len - 1] == '\n')
 		{
-			i++;
-			continue ;
+			temp = ft_substr(src[i], 0, len - 1);
+			dest[j] = temp;
 		}
-		dest[j] = ft_strdup(src[i]);
+		else
+			dest[j] = ft_strdup(src[i]);
 		j++;
 		i++;
 	}

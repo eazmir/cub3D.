@@ -94,8 +94,7 @@ int	ft_check_mltple_txtrse(char **maps, int height)
 
 int	ft_validate_texture_format(char **p)
 {
-	int		i;
-	char	*cmp;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -103,7 +102,7 @@ int	ft_validate_texture_format(char **p)
 		if (!p[i])
 			return (0);
 		if (!is_valid_extension(p[i]))
-			return (-2);
+			return (0);
 		i++;
 	}
 	return (1);
@@ -124,5 +123,7 @@ int	ft_check_txt_isvald(t_cub *game, t_texturse *txt)
 	if (!ft_check_mltple_txtrse(txt1, txt_count))
 		return (0);
 	p = ft_parse_txt_from_map(txt, txt1, txt_count);
-	return (ft_validate_texture_format(p));
+	if (!ft_validate_texture_format(p))
+		return (-2);
+	return (1);
 }

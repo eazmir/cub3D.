@@ -30,19 +30,19 @@ void	debug_game(t_cub *game, t_texturse *txt)
 
 	i = 0;
 	printf("===== DEBUG GAME =====\n");
-	printf("Map width: %d\n", game->map.width);
-	printf("Map height: %d\n", game->map.height);
-	debug_color("Floor", game->map.f_color);
-	debug_color("Ceiling", game->map.c_color);
+	printf("Map width: %d\n", game->width);
+	printf("Map height: %d\n", game->height);
+	debug_color("Floor", game->f_color);
+	debug_color("Ceiling", game->c_color);
 	printf("\nTextures:\n");
 	printf("  NO: -> %s\n", txt->no);
 	printf("  SO: -> %s\n", txt->so);
 	printf("  WE: -> %s\n", txt->we);
 	printf("  EA: -> %s\n", txt->ea);
 	printf("\nMap grid:\n");
-	while (i < game->map.height && game->map.grid[i])
+	while (i < game->height && game->grid[i])
 	{
-		printf("%s\n", game->map.grid[i]);
+		printf("%s\n", game->grid[i]);
 		i++;
 	}
 	printf("======================\n");
@@ -53,9 +53,9 @@ void	debug_map_grid(t_cub *game)
 	int	i;
 
 	i = 0;
-	while (i < game->map.height && game->map.grid[i])
+	while (i < game->height && game->grid[i])
 	{
-		printf("%s", game->map.grid[i]);
+		printf("%s", game->grid[i]);
 		i++;
 	}
 }

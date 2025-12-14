@@ -115,7 +115,7 @@ int	ft_check_space_on_map(char **map, int height, int width)
 		j = 0;
 		while (j < width && cop_map[i][j])
 		{
-			if (cop_map[i][j] == 'N'
+			if (cop_map[i][j] == 'N' || cop_map[i][j] == '0'
 				|| cop_map[i][j] == 'S' || cop_map[i][j] == 'E'
 				|| cop_map[i][j] == 'W')
 			{

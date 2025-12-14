@@ -82,14 +82,19 @@ char	**ft_parse_txt_from_map(t_texturse *txt, char **map, int height)
 
 int	is_valid_extension(char *path)
 {
-	char	*dot;
+	char	*last_dot;
+	int		i;
 
-	ft_remove_newline(path);
-	dot = ft_strchr(path, '.');
-	if (!dot)
+	remove_space_newline(path);
+	last_dot = ft_strrchr(path, '.');
+	if (!last_dot || ft_strcmp(last_dot, ".xpm") != 0)
 		return (0);
-	if (ft_strcmp(path, dot) != 0 && (ft_strlen(dot) >= 5
-			|| ft_strlen(dot) <= 3))
-		return (0);
+	i = 0;
+	while (path[i])
+	{
+		if (path[i] == '.' && path[i + 1] == '.')
+			return (0);
+		i++;
+	}
 	return (1);
 }

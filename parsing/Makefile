@@ -8,6 +8,7 @@ DEBUG_DIR = debug
 UTILS_DIR = $(CONFIG_DIR)/utils
 
 SRC = \
+	start_game.c\
 	$(CONFIG_DIR)/ft_config.c\
 	$(DEBUG_DIR)/ft_debug.c\
 	$(CONFIG_DIR)/ft_map.c\
@@ -21,6 +22,7 @@ SRC = \
 	$(UTILS_DIR)/ft_utils2.c\
 	$(UTILS_DIR)/ft_tools1.c\
 	$(UTILS_DIR)/ft_tools2.c\
+	$(UTILS_DIR)/ft_tools4.c\
 	$(UTILS_DIR)/ft_utils3.c\
 	$(UTILS_DIR)/ft_tools3.c\
 	$(UTILS_DIR)/ft_utils4.c\

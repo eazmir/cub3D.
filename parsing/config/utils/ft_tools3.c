@@ -80,7 +80,7 @@ static char	**copy_map_grid(t_cub *game, char **src, int start, int end)
 		i++;
 	}
 	dest[j] = NULL;
-	game->map.height = j;
+	game->height = j;
 	return (dest);
 }
 

@@ -42,10 +42,10 @@ int	ft_config(t_cub *game, t_texturse *txt)
 		return (0);
 	}
 	game->norm.cp_map = ft_remove_newline_from_map(game, src, height);
-	game->map.grid = ft_cp2d(game, game->norm.cp_map, game->norm.height);
-	if (!game->map.grid)
+	game->grid = ft_cp2d(game, game->norm.cp_map, game->norm.height);
+	if (!game->grid)
 		return (0);
-	game->map.width = ft_strlen(game->map.grid[0]);
+	game->width = get_map_width(game->grid);
 	if (!ft_check_txt_error(game, txt))
 		return (0);
 	close(fd);
@@ -66,10 +66,9 @@ void	the_end(t_cub *game, t_texturse *txt)
 		ft_malloc(0, 0);
 		exit(0);
 	}
-	pos_player = ft_get_position(game->map.grid, game->map.height,
-			game->map.width);
-	game->map.player_x = pos_player[0];
-	game->map.player_y = pos_player[1];
+	pos_player = ft_get_position(game->grid, game->height, game->width);
+	game->player_x = pos_player[0];
+	game->player_y = pos_player[1];
 }
 
 int	init_game(t_cub **game, t_texturse **txt, char *file)
@@ -82,7 +81,7 @@ int	init_game(t_cub **game, t_texturse **txt, char *file)
 		return (0);
 	}
 	init_cub(*game);
-	init_texturse(*txt, *game);
+	init_texturse(*txt);
 	(*game)->file = file;
 	the_end(*game, *txt);
 	return (1);

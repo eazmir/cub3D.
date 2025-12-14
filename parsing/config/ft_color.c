@@ -70,30 +70,28 @@ int	ft_color_format(char **maps, char key, int height)
 
 int	check_floor_color(t_cub *game)
 {
-	game->map.f_color = ft_color_format(game->norm.cp_map, 'F',
-			game->norm.height);
-	if (game->map.f_color == -2)
+	game->f_color = ft_color_format(game->norm.cp_map, 'F', game->norm.height);
+	if (game->f_color == -2)
 		return (error("Floor color values must be positive"), 0);
-	if (game->map.f_color == -1)
+	if (game->f_color == -1)
 		return (error("Floor color values must be between (0,255)"), 0);
-	if (game->map.f_color == -3)
+	if (game->f_color == -3)
 		return (error("Floor color definition is missing or incomplete"), 0);
-	if (game->map.f_color == -4)
+	if (game->f_color == -4)
 		return (error("Floor color must have exactly 3 values (R,G,B)"), 0);
 	return (1);
 }
 
 int	check_ceiling_color(t_cub *game)
 {
-	game->map.c_color = ft_color_format(game->norm.cp_map, 'C',
-			game->norm.height);
-	if (game->map.c_color == -2)
+	game->c_color = ft_color_format(game->norm.cp_map, 'C', game->norm.height);
+	if (game->c_color == -2)
 		return (error("Ceiling color values must be positive"), 0);
-	if (game->map.c_color == -1)
+	if (game->c_color == -1)
 		return (error("Ceiling color values must be between (0,255)"), 0);
-	if (game->map.c_color == -3)
+	if (game->c_color == -3)
 		return (error("Ceiling color definition is missing or incomplete"), 0);
-	if (game->map.c_color == -4)
+	if (game->c_color == -4)
 		return (error("Ceiling color must have exactly 3 values (R,G,B)"), 0);
 	return (1);
 }
