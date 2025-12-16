@@ -22,6 +22,8 @@ int	is_invalid_space(char **map_copy, int i, int j, int height)
 		return (0);
 	if (map_copy[i][j] == '1' || map_copy[i][j] == 'V')
 		return (0);
+	if (map_copy[i][j] == ' ' || map_copy[i][j] == '\t')
+		return (1);
 	map_copy[i][j] = 'V';
 	if (is_invalid_space(map_copy, i - 1, j, height))
 		return (1);

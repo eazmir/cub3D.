@@ -47,20 +47,3 @@ void	debug_game(t_cub *game, t_texturse *txt)
 	}
 	printf("======================\n");
 }
-
-void	debug_map_grid(t_cub *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < game->height && game->grid[i])
-	{
-		printf("%s", game->grid[i]);
-		i++;
-	}
-}
-
-void	debug_player(int x, int y, char dir)
-{
-	printf("Player position: (%d,%d) facing '%c'\n", x, y, dir);
-}

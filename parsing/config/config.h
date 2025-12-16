@@ -54,7 +54,6 @@ typedef struct s_cub
 	int			height;
 	int			player_x;
 	int			player_y;
-	t_texturse	*txt;
 	char		*file;
 	t_norm		norm;
 }				t_cub;
@@ -77,7 +76,6 @@ int				ft_texturse_formate(char *key, int i);
 int				ft_checker(char *line);
 int				ft_force_checker(char *s);
 int				ft_isvalid(char *r, char *g, char *b);
-int				ft_check_lines(char **p);
 int				is_invalid_space(char **map_copy, int i, int j, int height);
 int				ft_check_empty_values(char **rgb);
 int				check_floor_color(t_cub *game);
@@ -94,7 +92,6 @@ char			*ft_parse_txtrse(char *path, t_texturse *txt);
 char			**get_texturse(char **line, int height);
 char			**ft_parse_txt_from_map(t_texturse *txt, char **map,
 					int height);
-char			**normalize_map(char **map, int width, int height);
 char			*clean_component(char *value, char key, int is_first);
 char			**get_rgb_components(char **maps, char key, int height);
 char			**get_copy(char **src, int height);

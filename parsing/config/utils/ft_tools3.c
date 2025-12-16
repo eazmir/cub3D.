@@ -72,7 +72,7 @@ static char	**copy_map_grid(t_cub *game, char **src, int start, int end)
 	{
 		if (!src[i])
 			break ;
-		if (!ft_checker3(src[i]))
+		if (!ft_checker3(src[i]) && src[i][0] != '\n')
 		{
 			ft_remove_newline(src[i]);
 			dest[j++] = ft_strdup(src[i]);
@@ -86,9 +86,8 @@ static char	**copy_map_grid(t_cub *game, char **src, int start, int end)
 
 char	**ft_cp2d(t_cub *game, char **src, int height)
 {
-	int		start;
-	int		end;
-	char	**cp;
+	int	start;
+	int	end;
 
 	if (is_map_empty(src))
 	{

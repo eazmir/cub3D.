@@ -1,5 +1,5 @@
-# CC = cc
-# CFLAGS = -g -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 # SAN =  -g -O0 -fno-omit-frame-pointer -fsanitize=address 
 
 NAME = MST.a
@@ -30,13 +30,10 @@ SRC = \
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME) $(LIBFT_LIB)
-
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar csr $(NAME) $(OBJ)
-# $(NAME): $(OBJ) $(LIBFT_LIB)
-# 	@$(CC) $(CFLAGS) $(SAN) $(OBJ) $(LIBFT_LIB) -o $(NAME) 
 
 clean:
 	@rm -f $(OBJ)

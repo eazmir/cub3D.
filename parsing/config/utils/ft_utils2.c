@@ -16,7 +16,6 @@ char	**ft_cp_map(int fd, int height)
 {
 	char	**dest;
 	char	*line;
-	char	*prev_line;
 	int		i;
 
 	dest = ft_malloc(sizeof(char *) * (height + 1), 1);

@@ -15,11 +15,6 @@
 
 # include "../include/parsing.h"
 
-typedef struct s_cub		t_cub;
-typedef struct s_texturse	t_texturse;
-
 void						debug_game(t_cub *game, t_texturse *txt);
 void						debug_color(const char *name, int color);
-void						debug_map_grid(t_cub *game);
-void						debug_player(int x, int y, char dir);
 #endif
