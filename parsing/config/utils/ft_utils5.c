@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eazmir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: eazmir <eazmir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 14:44:31 by eazmir            #+#    #+#             */
-/*   Updated: 2025/12/10 14:46:10 by eazmir           ###   ########.fr       */
+/*   Updated: 2025/12/17 22:07:12 by eazmir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ char	**get_texturse(char **line, int height)
 	{
 		if (ft_checker(line[i]))
 			txt[j++] = line[i];
-		else if (is_empty(line[i]))
-			;
-		else if (is_grid(line[i]))
-			;
 		i++;
 	}
 	txt[j] = NULL;
